@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Download Free Music and Listern Ads Free Songs">
+    <meta name="keywords" content="Free Music, Download Music, Mp3 Download, Free Ads Music,">
+    <meta name="author" content="Nitesh Singh">
+    <link rel="icon" type="image/png" href="assets/logo.png" />
+    <!-- <link rel="icon" type="image/x-icon" sizes="32x32" href="/assets/logo.png" /> -->
+    <title> Free Muisc4All</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+
+        .logo {
+            font-family: 'Caveat', cursive;
+        }
+
+        .img {
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position-x: center;
+            background-position-y: center;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="flex justify-center items-center mt-4">
+            <a href="">
+                <span class="logo text-4xl text-pink-500 text-center">
+                    FreeMuisc4All
+                </span>
+            </a>
+
+
+        </div>
+
+        <div class="my-5 mx-3 flex">
+            <input id="userReq" type="text" class="mr-2 w-full px-2 py-1 border-2 border-solid"
+                placeholder="Search Music">
+            <button id="search" class="bg-black text-white px-2 py-1">Search</button>
+        </div>
+    </header>
+
+    <main>
+        <div id="musicList" class="flex flex-col items-center mx-3 ">
+            <h1 class="text-center text-lg">☹️ No Music Searched !</h1>
+        </div>
+    </main>
+
+    <footer class="flex flex-col my-4 justify-center items-center ">
+        <p class="text-xs">Thanks for visitng</p>
+        <p class="text-xs">Made with <span style="color: #FC4850;">Love</span></p>
+        <p class="text-xs">Not With HTML CSS JavaScript</span>
+    </footer>
+
+
+
+</body>
+
+<script>
+
+
+    let userReq = document.getElementById("userReq");
+    let searchbtn = document.getElementById("search");
+    let musicList = document.getElementById("musicList");
+
+
+    async function getData(url) {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`An error occurred: ${response.status}`);
+            }
+            const data = await response.json();
+            result = data["data"]["results"]
+            console.log(result.length);
+            Cards = ""
+
+
+            for (let i = 0; i<result.length; i++) {
+                Cards += ` 
+                <div id="musicCard" class="w-full  mb-3 p-2 border-2 border-gray-200 border-solid flex  justify-center items-center  rounded-md">
+                    <div class="img w-20 h-20 rounded-lg" style="background-image: url(${result[i]["image"][0]["link"]});"></div>
+                        <div class="w-full ml-5">
+                            <p class="text-lg">${result[i]["name"]}</p>
+                            <p class="text-xs">${result[i]["label"]}</p>
+                        </div>
+                     <div class="text-2xl mx-2"><button onClick="dropDown(${i})" class="dropdownbtn" index=${i}><i class="bi bi-chevron-down"></i></button></div>
+                </div>
+                <div 
+                class="hidden dropdown w-full mb-3 p-2 border-2 border-gray-200 border-solid flex  justify-center items-center  rounded-md">
+                <iframe src="${result[i]["downloadUrl"][4]["link"]}"
+                    frameborder="0" class="w-full"></iframe>
+                </div>    
+                `
+            }
+            musicList.innerHTML = Cards
+
+        } catch (error) {
+            musicList.innerHTML = ` <h1 class="text-center text-lg">${error}</h1>`
+        }
+    }
+
+    function search() {
+        getData(`https://saavn.me/search/songs?query=${userReq.value}&page=1&limit=10`);
+    };
+
+    searchbtn.addEventListener("click", search);
+    userReq.addEventListener("keypress", (e) => {
+        if (e.key === 'Enter') {
+            search();
+        }
+    })
+
+    // Download Button
+
+
+    let dropDownState = true;
+    let dropDownBtn = document.getElementsByClassName("dropdownbtn");
+
+    function dropDown(index) {
+        if (dropDownState) {
+            document.getElementsByClassName("dropdown")[index].style.display = "block";
+            document.getElementsByClassName("dropdownbtn")[index].innerHTML = "<i class='bi bi-chevron-up'>"
+            dropDownState = false;
+        }
+        else {
+            document.getElementsByClassName("dropdown")[index].style.display = "none";
+            document.getElementsByClassName("dropdownbtn")[index].innerHTML = "<i class='bi bi-chevron-down'>"
+            dropDownState = true;
+        }
+
+    }
+
+</script>
+
+</html>
