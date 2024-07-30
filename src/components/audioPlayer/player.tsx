@@ -1,10 +1,10 @@
-import { ChangeEvent, RefObject, useEffect, useRef, useState } from "react"
-import { PlayerProperties } from "./types"
-import { HiPlay, HiPause, HiChevronRight, HiChevronLeft, HiListBullet } from "react-icons/hi2";
-import { usePlayer } from "../../data/store";
-import { decodeHtmlEntities, downloadURL, formatTime, getArtist } from "../../utils";
-import { MdFileDownload } from "react-icons/md";
 import { Progress } from "./progress";
+import { PlayerProperties } from "./types"
+import { useData } from "../../data/store";
+import { MdFileDownload } from "react-icons/md";
+import { ChangeEvent, RefObject, useEffect, useRef, useState } from "react"
+import { decodeHtmlEntities, downloadURL, formatTime, getArtist } from "../../utils";
+import { HiPlay, HiPause, HiChevronRight, HiChevronLeft, HiListBullet } from "react-icons/hi2";
 
 
 
@@ -63,11 +63,15 @@ export function Player() {
     }
 
     const [playerData, setPlayerData] = useState<any>(null)
-    const musicData = usePlayer((state) => state.musicId)
+
+    const musicData = useData((state) => state.currentMusicId)
 
     useEffect(() => {
         const req = async () => {
             const response = await fetch(`https://saavn.dev/api/songs/${musicData}`)
+            console.log("response");
+            console.log(response);
+
             const json = await response.json();
             setPlayerData(json.data[0])
         }
@@ -155,11 +159,12 @@ export function Player() {
                                 src={playerData.image[2].url}
                                 alt={playerData.name}
                                 className="h-full w-full object-cover rounded-md"
+                                onClick={handlePlayPause}
                             />
                         </div>
 
                         <div className="flex flex-col gap-1 justify-center items-center">
-                            <div className="text-xl font-bold">{decodeHtmlEntities(playerData.name)}</div>
+                            <div className="text-2xl font-bold">{decodeHtmlEntities(playerData.name)}</div>
                             <div className="text-xs text-gray-400">{getArtist(playerData.artists)}</div>
 
                         </div>

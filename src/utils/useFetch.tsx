@@ -1,5 +1,11 @@
 import { useState, useEffect } from 'react';
 
+export interface FetchRequest {
+    data: any
+    loading: boolean
+    error: boolean
+}
+
 export function useFetch(url: string) {
     const [data, setData] = useState<any>(null);
     const [loading, setLoading] = useState<boolean>(false);
@@ -22,6 +28,6 @@ export function useFetch(url: string) {
         }
     }, [url]);
 
-    return { data, loading, error }
+    return { data, loading, error } as FetchRequest
 }
 

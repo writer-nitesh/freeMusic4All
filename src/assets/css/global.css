@@ -4,8 +4,76 @@
 @tailwind utilities;
 
 
+/* Layout */
+.container {
+    display: grid;
+    height: 100vh;
+
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr 500px;
+    grid-template-areas:
+        "header header"
+        "main sidebar"
+        "footer footer";
+    height: 100vh;
+}
+
+.header {
+    grid-area: header;
+    padding: 10px;
+}
+
+.main {
+    overflow-y: auto;
+    grid-area: main;
+    padding: 10px;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    padding: 10px;
+}
+
+.footer {
+    grid-area: footer;
+    padding: 10px;
+}
+
+.container.sidebar-hidden {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+}
+
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header"
+            "main"
+            "footer";
+    }
+
+    .sidebar {
+        display: none;
+    }
+}
+
+
 .logo {
     font-family: 'Dancing Script', cursive;
+}
+
+
+
+img {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
 }
 
 ::-webkit-scrollbar-track {

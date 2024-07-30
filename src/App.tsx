@@ -10,6 +10,7 @@ export default function App() {
         <Route index element={<BaseView />} />
         <Route path="about" element={<About />} />
         <Route path="search" element={<Search />} />
+        <Route path="search/:params" element={<Search />} />
         <Route path="playlist" element={<Playlist />} />
         <Route path="album" element={<Album />} />
       </Route>

@@ -6,7 +6,7 @@ export function Logo() {
         <button
             type="button"
             aria-label="home"
-            className='logo text-primary lg:text-3xl md:text-2xl text-xl'
+            className='logo text-primary lg:text-3xl md:text-2xl text-xl outline-none'
             onClick={() => navigate("/")}
         >
             freeMusic4all
