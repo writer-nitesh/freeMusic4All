@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import { FetchRequest, useFetch } from "../utils";
+import { FetchRequest } from "../utils";
 import { Card, Error, Loader, SearchBar, Title } from "../components";
 import { useEffect, useState } from "react";
 
