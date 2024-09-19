@@ -1,15 +1,13 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export function Logo() {
-    const navigate = useNavigate();
     return (
-        <button
-            type="button"
+        <Link
+            to="/"
             aria-label="home"
-            className='logo text-primary lg:text-3xl md:text-2xl text-xl outline-none'
-            onClick={() => navigate("/")}
+            className='logo text-primary lg:text-2xl md:text-2xl text-2xl outline-none'
         >
             freeMusic4all
-        </button>
+        </Link>
     )
 }

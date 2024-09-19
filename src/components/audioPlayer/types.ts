@@ -5,5 +5,7 @@ export interface PlayerProperties {
     isFullScreen: boolean
     isAudioPlaying: boolean
     volume: number
+    playerData: any
+    musicId: string
 }
 

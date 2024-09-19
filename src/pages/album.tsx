@@ -5,7 +5,7 @@ import { useFetch } from "../utils"
 export function Album() {
     const [searchParams] = useSearchParams();
     const id = searchParams.get("id")
-    const { data, loading, error } = useFetch(`https://saavn.dev/api/albums?id=${id}&limit=40`)
+    const { data, loading, error } = useFetch(`https://api-fm4all.vercel.app/api/albums?id=${id}&limit=40`)
     console.log(data);
 
 

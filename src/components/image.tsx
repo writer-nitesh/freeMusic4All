@@ -1,11 +1,17 @@
-
 export enum ImageSize {
-    SMALL = "0",
-    MEDIUM = "1",
-    LARGE = "2",
+    '50x50' = "0",
+    '150x150' = "1",
+    '500x500' = "2",
 }
 
-export function Image({ images, alt, size = ImageSize.MEDIUM }: { images: any, alt: string, size: ImageSize }) {
+interface ImageProps {
+    images: any
+    alt: string
+    size: ImageSize
+}
+
+export function Image({ images, alt, size}: ImageProps) {
+
     return (
         <div className='max-h-20 max-w-20 rounded-md'>
             <img

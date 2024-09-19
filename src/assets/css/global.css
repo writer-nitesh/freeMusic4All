@@ -3,70 +3,48 @@
 @tailwind components;
 @tailwind utilities;
 
-
-/* Layout */
-.container {
-    display: grid;
-    height: 100vh;
-
-    grid-template-rows: auto 1fr auto;
-    grid-template-columns: 1fr 500px;
-    grid-template-areas:
-        "header header"
-        "main sidebar"
-        "footer footer";
-    height: 100vh;
-}
-
-.header {
-    grid-area: header;
-    padding: 10px;
-}
-
-.main {
-    overflow-y: auto;
-    grid-area: main;
-    padding: 10px;
-}
-
-.sidebar {
-    grid-area: sidebar;
-    padding: 10px;
-}
-
-.footer {
-    grid-area: footer;
-    padding: 10px;
-}
-
-.container.sidebar-hidden {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-        "header"
-        "main"
-        "footer";
-}
-
-@media (max-width: 768px) {
-    .container {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            "header"
-            "main"
-            "footer";
-    }
-
-    .sidebar {
-        display: none;
-    }
-}
-
-
 .logo {
     font-family: 'Dancing Script', cursive;
 }
 
+.marquee-container {
+    width: 300px;
+    overflow: hidden;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
+.marquee {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.truncate-container {
+    width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.truncate-text {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 img {
     -webkit-user-select: none;
@@ -84,7 +62,7 @@ img {
 
 ::-webkit-scrollbar {
     width: 5px;
-    background-color: transparent;
+    background-color: #48484887;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -165,9 +143,16 @@ input[type="range"]:focus::-moz-range-thumb {
     box-shadow: 0 0 0 13px #ef4e894a
 }
 
-.glass {
-    background: rgba(255, 255, 255, 0.192);
+.glass_white {
+    background: rgba(255, 255, 255, 0.153);
     /* box-shadow: 1px 1px 1px 0 rgba(255, 255, 255, 0.37); */
-    -webkit-backdrop-filter: blur(6.5px);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(6.5px);
+}
+
+.glass_black {
+    background: rgba(45, 45, 45, 0.632);
+    /* box-shadow: 1px 1px 1px 0 rgba(255, 255, 255, 0.37); */
+    -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(6.5px);
 }
